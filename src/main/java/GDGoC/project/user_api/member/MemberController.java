@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping("/signin")
-    public String signin(){
-        return "sign_in";
+    @GetMapping("/login")
+    public String login() {
+        return "login_form";
     }
 
     @GetMapping("/signup")

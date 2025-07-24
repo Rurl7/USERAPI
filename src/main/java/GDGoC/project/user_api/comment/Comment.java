@@ -1,18 +1,17 @@
-package GDGoC.project.user_api.post;
+package GDGoC.project.user_api.comment;
 
-import GDGoC.project.user_api.comment.Comment;
 import GDGoC.project.user_api.member.Member;
+import GDGoC.project.user_api.post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
-public class Post {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,9 +21,10 @@ public class Post {
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList;
+    @ManyToOne(fetch = FetchType.LAZY) /* 답변(many), 질문(one) N:1 관계를 나타냄 -> 외래키 관계가 생성됨 */
+    private Post post; /* 댓글 엔티티에서 게시글 엔티티 참조 */
 
     @ManyToOne
     private Member author;
 }
+

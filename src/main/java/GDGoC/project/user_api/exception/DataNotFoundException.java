@@ -1,4 +1,4 @@
-package GDGoC.project.user_api;
+package GDGoC.project.user_api.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

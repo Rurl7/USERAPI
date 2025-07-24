@@ -1,8 +1,11 @@
 package GDGoC.project.user_api.member;
 
+import GDGoC.project.user_api.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -17,5 +20,14 @@ public class MemberService {
         member.setNickname(nickname);
         member.setPhone(phone);
         this.memberRepository.save(member);
+    }
+
+    public Member getUser(String username) {
+        Optional<Member> member = this.memberRepository.findByUsername(username);
+        if (member.isPresent()) {
+            return member.get();
+        } else {
+            throw new DataNotFoundException("member not found");
+        }
     }
 }
