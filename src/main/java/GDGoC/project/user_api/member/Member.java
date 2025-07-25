@@ -16,7 +16,7 @@ public class Member {
     private String userId;
     private String password;
 
-    private String nickname;
+    private String username;
 
     @Column(unique = true)
     private String phone;

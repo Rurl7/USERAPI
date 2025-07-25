@@ -23,7 +23,7 @@ public class MemberForm {
     private String password2;
 
     @NotEmpty(message = "닉네임은 필수항목입니다.")
-    private String nickname;
+    private String username;
 
     @NotEmpty(message = "전화번호는 필수항목입니다.")
     private String phone;

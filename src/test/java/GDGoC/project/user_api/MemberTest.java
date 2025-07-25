@@ -26,7 +26,7 @@ public class MemberTest {
         Member member = new Member();
         member.setUserId("userId");
         member.setPassword(passwordEncoder.encode("1234"));
-        member.setNickname("nickname");
+        member.setUsername("username");
         member.setPhone("010-9999-9999");
         this.memberRepository.save(member);
     }

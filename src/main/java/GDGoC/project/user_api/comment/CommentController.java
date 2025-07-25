@@ -20,8 +20,8 @@ import java.security.Principal;
 @Controller
 public class CommentController {
     private final PostService postService;
-    private final CommentService commentService;
     private final MemberService memberService;
+    private final CommentService commentService;
 
     @PostMapping("/create/{id}")
     public String createComment(Model model, @PathVariable("id") Long id, @Valid CommentForm commentForm, BindingResult bindingResult, Principal principal) {

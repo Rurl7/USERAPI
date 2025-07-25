@@ -13,11 +13,11 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void createMember(String userId, String password, String nickname, String phone) {
+    public void createMember(String userId, String password, String username, String phone) {
         Member member = new Member();
         member.setUserId(userId);
         member.setPassword(passwordEncoder.encode(password));
-        member.setNickname(nickname);
+        member.setUsername(username);
         member.setPhone(phone);
         this.memberRepository.save(member);
     }

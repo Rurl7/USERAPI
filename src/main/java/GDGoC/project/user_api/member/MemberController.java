@@ -35,7 +35,7 @@ public class MemberController {
         }
 
         try {
-            memberService.createMember(memberForm.getUserId(),memberForm.getPassword1(),memberForm.getNickname(),memberForm.getPhone());
+            memberService.createMember(memberForm.getUserId(),memberForm.getPassword1(),memberForm.getUsername(),memberForm.getPhone());
         }catch(DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
