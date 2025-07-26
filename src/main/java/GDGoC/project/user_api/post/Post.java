@@ -1,8 +1,9 @@
 package GDGoC.project.user_api.post;
 
-import GDGoC.project.user_api.comment.Comment;
+//import GDGoC.project.user_api.comment.Comment;
+//comment가 빨갛게 되는 오류 : comment 클래스를 생성하지 않았기 때문??
 import GDGoC.project.user_api.member.Member;
-import jakarta.persistence.*;
+import jakarta.persistence.*; //(JPA)
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,8 +23,8 @@ public class Post {
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList;
+    //@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    //private List<Comment> commentList;
 
     @ManyToOne
     private Member author;
