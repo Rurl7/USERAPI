@@ -25,5 +25,4 @@ public class Like {
     private Member member;
 
     private LocalDateTime creatDate;
-
 }

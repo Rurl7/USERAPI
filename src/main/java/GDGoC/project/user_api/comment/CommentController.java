@@ -28,7 +28,7 @@ public class CommentController {
     @PostMapping("/create/{id}")
     public String createComment(Model model, @PathVariable("id") Long id, @Valid CommentForm commentForm, BindingResult bindingResult, Principal principal) {
         Post post = this.postService.getPost(id);
-        Member member = this.memberService.getUser(principal.getName());
+        Member member = this.memberService.getMember(principal.getName());
         if(bindingResult.hasErrors()) {
             model.addAttribute("post", post);
             return "post_detail";

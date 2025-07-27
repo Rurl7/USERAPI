@@ -36,7 +36,7 @@ public class PostController {
         if (bindingResult.hasErrors()) {
             return "post_form";
         }
-        Member member = this.memberService.getUser(principal.getName());
+        Member member = this.memberService.getMember(principal.getName());
         this.postService.createPost(postForm.getContent(), member);
         return "redirect:/post/list";
     }
@@ -59,7 +59,7 @@ public class PostController {
         if (!post.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
         }
-        this.postService.delete(post);
+        this.postService.deletePost(post.getId());
         return "redirect:/";
     }
 }
