@@ -59,7 +59,6 @@ public class PostService {
         like.setMember(member);
         like.setCreatDate(LocalDateTime.now());
         likeRepository.save(like);
-        //빨간줄이 왜 뜨지... 캐시 삭제 해봤는데
     }
 
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootTest /* MemberTest 클래스가 스프링 부트의 테스트 클래스임을 의미 */
 public class MemberTest {
@@ -16,14 +17,16 @@ public class MemberTest {
      *  */
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Test
     @DisplayName("회원 등록 테스트")
     void createMember() {
         Member member = new Member();
         member.setUserId("userId");
-        member.setPassword("password");
-        member.setNickname("nickname");
+        member.setPassword(passwordEncoder.encode("1234"));
+        member.setUsername("username");
         member.setPhone("010-9999-9999");
         this.memberRepository.save(member);
     }

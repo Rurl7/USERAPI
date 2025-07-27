@@ -17,10 +17,13 @@ public class MemberForm {
     private String userId;
 
     @NotEmpty(message = "비밀번호는 필수항목입니다.")
-    private String password;
+    private String password1;
+
+    @NotEmpty(message = "비밀번호 확인은 필수항목입니다.")
+    private String password2;
 
     @NotEmpty(message = "닉네임은 필수항목입니다.")
-    private String nickname;
+    private String username;
 
     @NotEmpty(message = "전화번호는 필수항목입니다.")
     private String phone;

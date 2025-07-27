@@ -1,9 +1,6 @@
 package GDGoC.project.user_api.member;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +12,12 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY) /* 데이터를 저장할 때 해당 속성에 값을 일일이 입력하지 않아도 자동으로 1씩 증가하여 저장됨 */
     private Integer id;
 
+    @Column(unique = true)
     private String userId;
     private String password;
-    private String nickname;
+
+    private String username;
+
+    @Column(unique = true)
     private String phone;
 }
