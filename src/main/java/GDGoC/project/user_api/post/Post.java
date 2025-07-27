@@ -22,7 +22,7 @@ public class Post {
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
 
     @ManyToOne
