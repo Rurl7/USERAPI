@@ -26,5 +26,7 @@ public class Comment {
 
     @ManyToOne
     private Member author;
+
+    private LocalDateTime modifyDate;
 }
 
