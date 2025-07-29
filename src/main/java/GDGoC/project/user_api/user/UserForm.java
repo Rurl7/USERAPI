@@ -1,4 +1,4 @@
-package GDGoC.project.user_api.member;
+package GDGoC.project.user_api.user;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MemberForm {
+public class UserForm {
     @NotEmpty(message = "아이디는 필수항목입니다.")
     private String userId;
 
