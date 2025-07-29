@@ -1,7 +1,7 @@
 package GDGoC.project.user_api.post;
 
 import GDGoC.project.user_api.comment.Comment;
-import GDGoC.project.user_api.member.Member;
+import GDGoC.project.user_api.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,18 +15,19 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(columnDefinition = "TEXT")
     private String content;
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    /* mappedBy: 참조 엔티티의 속성명 */
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
 
     @ManyToOne
-    private Member author;
+    private User author;
 
     private LocalDateTime modifyDate;
 }
