@@ -36,7 +36,7 @@ public class CommentTest {
         comment.setPost(p);
         comment.setCreateDate(LocalDateTime.now());
         // TODO: author 테스트
-//        comment.setAuthor();
+        comment.setAuthor(null);
         this.commentRepository.save(comment);
     }
 
