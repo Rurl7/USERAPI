@@ -30,22 +30,31 @@ public class PostService {
         }
     }
 
-    // 게시글 생성 부분
-    public void createPost(String content, User user) {
+    public Post createPost(String content, User author) {
         Post post = new Post();
         post.setContent(content);
+        post.setAuthor(author);
         post.setCreateDate(LocalDateTime.now());
-        post.setAuthor(user);
-        this.postRepository.save(post);
+        return this.postRepository.save(post);
     }
 
-    public void modifyPost(Post post, String content) {
-        post.setContent(content);
+    public void modifyPost(Post post, String newContent) {
+        post.setContent(newContent);
         post.setModifyDate(LocalDateTime.now());
         this.postRepository.save(post);
     }
 
     public void deletePost(Post post) {
         this.postRepository.delete(post);
+    }
+
+    public boolean toggleLike(Post post, User user) {
+        if (post.getLikes().contains(user)) {
+            post.getLikes().remove(user);
+            return false;   // 좋아요 취소됨
+        } else {
+            post.getLikes().add(user);
+            return true;    // 좋아요 추가됨
+        }
     }
 }

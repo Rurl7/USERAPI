@@ -3,6 +3,8 @@ package GDGoC.project.user_api;
 import GDGoC.project.user_api.post.Post;
 import GDGoC.project.user_api.post.PostRepository;
 import GDGoC.project.user_api.post.PostService;
+import GDGoC.project.user_api.user.User;
+import GDGoC.project.user_api.user.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class PostTest {
     private PostService postService;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     @DisplayName("Post 생성")
@@ -27,6 +31,7 @@ public class PostTest {
         Post p1 = new Post();
         p1.setContent("sns");
         p1.setCreateDate(LocalDateTime.now());
+        p1.setAuthor(userRepository.findById(1).get());
         this.postRepository.save(p1);
     }
 
