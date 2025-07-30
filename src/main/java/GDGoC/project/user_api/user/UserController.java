@@ -3,51 +3,36 @@ package GDGoC.project.user_api.user;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-@RequestMapping("/user")
-@RequiredArgsConstructor /* @RequiredArgsConstructor : 롬복이 제공하는 애너테이션으로, final이 붙은 속성을 포함하는 생성자를 자동으로 생성 */
-@Controller
+import java.security.Principal;
+
+
+/* 사용자 정보 조회 컨트롤러 */
+@RestController
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login_form";
+    /** 내 정보 */
+    @GetMapping("/me")
+    public UserDto me(Principal principal) {
+        return UserDto.from(userService.getUser(principal.getName()));
     }
 
-    @GetMapping("/signup")
-    public String signup(UserForm userForm){
-        return "sign_up";
-    }
-
-    @PostMapping("/signup")
-    public String signup(@Valid UserForm userForm, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return "sign_up";
-        }
-        if (!userForm.getPassword1().equals(userForm.getPassword2())) {
-            bindingResult.rejectValue("password2", "passwordInCorrect",
-                    "2개의 패스워드가 일치하지 않습니다.");
-            return "sign_up";
-        }
-
-        try {
-            userService.createUser(userForm.getUserId(),userForm.getPassword1(),userForm.getUsername(),userForm.getPhone());
-        }catch(DataIntegrityViolationException e) {
-            e.printStackTrace();
-            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
-            return "signup_form";
-        }catch(Exception e) {
-            e.printStackTrace();
-            bindingResult.reject("signupFailed", e.getMessage());
-            return "signup_form";
-        }
-
-        return "redirect:/";
+    /** 공개 프로필 (선택) */
+    @GetMapping("/{id}")
+    public UserDto getById(@PathVariable Integer id) {
+        return userService.getById(id)           // 새 메서드
+                .map(UserDto::from)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "User not found"));
     }
 }
+
